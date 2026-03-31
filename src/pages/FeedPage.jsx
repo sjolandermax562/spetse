@@ -42,8 +42,8 @@ export default function FeedSection() {
         <p className="feed__handle">@SpetseHQ on X</p>
 
         <div className="feed__posts">
-          {feedData.map(post => (
-            <article key={post.id} className="feed__post">
+          {feedData.map((post, i) => (
+            <article key={post.id} className={`feed__post${i === 0 ? ' feed__post--latest' : ''}`}>
               <p className="feed__post-text">{post.text}</p>
               <div className="feed__post-meta">
                 <span className="feed__post-date">{post.date}</span>
