@@ -36,7 +36,7 @@ export default async function handler(req, res) {
         closedDate: row.get('closedDate') || '',
         result: row.get('result') || '',
         platform: row.get('platform') || '',
-        thesis: row.get('thesis') || '',
+        thesisLink: row.get('thesisLink') || '',
       }))
 
     res.setHeader('Cache-Control', 's-maxage=300')

@@ -116,7 +116,11 @@ function ConvictionCard({ data }) {
             />
           </div>
 
-          <p className="conviction-card__thesis">{data.thesis}</p>
+          {data.thesisLink && (
+            <a className="conviction-card__link" href={data.thesisLink} target="_blank" rel="noopener noreferrer">
+              View full conviction →
+            </a>
+          )}
 
           <div className="conviction-card__footer">
             <span className="conviction-card__platform">{data.platform || 'POLYMARKET'}</span>
@@ -132,7 +136,11 @@ function ConvictionCard({ data }) {
               {data.result === 'correct' ? 'WON' : 'LOST'}
             </span>
           </div>
-          <p className="conviction-card__thesis">{data.thesis}</p>
+          {data.thesisLink && (
+            <a className="conviction-card__link" href={data.thesisLink} target="_blank" rel="noopener noreferrer">
+              View full conviction →
+            </a>
+          )}
           <div className="conviction-card__footer">
             <span className="conviction-card__platform">{data.platform || 'POLYMARKET'}</span>
             <span className="conviction-card__date">{data.closedDate}</span>
