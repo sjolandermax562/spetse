@@ -138,8 +138,9 @@
 }
 
 .conviction-card__badge--live {
-  color: var(--color-accent);
-  border-color: var(--color-accent);
+  color: #0F2A44;
+  border-color: #E8D9B5;
+  background: #E8D9B5;
 }
 
 .conviction-card__badge--expired {
