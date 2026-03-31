@@ -69,7 +69,7 @@ export default function AboutSection() {
                 trigger: item,
                 start: 'top 88%',
                 end: 'top 40%',
-                toggleActions: 'play reverse play reverse',
+                toggleActions: 'play none none none',
               },
             })
 
