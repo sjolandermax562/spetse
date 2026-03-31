@@ -118,7 +118,7 @@ function ConvictionCard({ data }) {
 
           {data.thesisLink && (
             <a className="conviction-card__link" href={data.thesisLink} target="_blank" rel="noopener noreferrer">
-              View full conviction →
+              View full conviction
             </a>
           )}
 
@@ -138,7 +138,7 @@ function ConvictionCard({ data }) {
           </div>
           {data.thesisLink && (
             <a className="conviction-card__link" href={data.thesisLink} target="_blank" rel="noopener noreferrer">
-              View full conviction →
+              View full conviction
             </a>
           )}
           <div className="conviction-card__footer">
