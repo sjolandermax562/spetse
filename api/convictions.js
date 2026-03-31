@@ -35,7 +35,6 @@ export default async function handler(req, res) {
         expiresDate: row.get('expiresDate') || '',
         closedDate: row.get('closedDate') || '',
         result: row.get('result') || '',
-        platform: row.get('platform') || '',
         thesisLink: row.get('thesisLink') || '',
       }))
 

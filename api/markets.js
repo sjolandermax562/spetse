@@ -29,7 +29,6 @@ export default async function handler(req, res) {
         title: row.get('title') || '',
         category: row.get('category') || '',
         probability: Number(row.get('probability')) || 0,
-        volume: row.get('volume') || '',
         platform: row.get('platform') || '',
         polymarketLink: row.get('polymarketLink') || '',
         kalshiLink: row.get('kalshiLink') || '',

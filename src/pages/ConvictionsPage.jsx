@@ -123,7 +123,6 @@ function ConvictionCard({ data }) {
           )}
 
           <div className="conviction-card__footer">
-            <span className="conviction-card__platform">{data.platform || 'POLYMARKET'}</span>
             <span className="conviction-card__date">{data.openedDate}</span>
           </div>
         </>
@@ -142,7 +141,6 @@ function ConvictionCard({ data }) {
             </a>
           )}
           <div className="conviction-card__footer">
-            <span className="conviction-card__platform">{data.platform || 'POLYMARKET'}</span>
             <span className="conviction-card__date">{data.closedDate}</span>
           </div>
         </>

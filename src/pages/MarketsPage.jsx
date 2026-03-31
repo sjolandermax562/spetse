@@ -57,7 +57,6 @@ export default function MarketsSection() {
               <div className="market-card__bar" />
 
               <div className="market-card__footer">
-                <span className="market-card__volume">{market.volume} volume</span>
                 <div className="market-card__links">
                   {market.polymarketLink && (
                     <a className="market-card__link" href={market.polymarketLink} target="_blank" rel="noopener noreferrer">
