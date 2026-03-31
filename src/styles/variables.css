@@ -1,0 +1,17 @@
+:root {
+  --color-bg: #0F2A44;
+  --color-bg-light: #132E4A;
+  --color-text: #E8D9B5;
+  --color-text-muted: rgba(232, 217, 181, 0.55);
+  --color-card-bg: rgba(18, 46, 74, 0.5);
+  --color-card-border: rgba(232, 217, 181, 0.08);
+  --color-card-border-hover: rgba(232, 217, 181, 0.18);
+  --color-accent: #4ADE80;
+  --color-accent-dim: rgba(74, 222, 128, 0.7);
+
+  --font-display: 'Cormorant Garamond', 'Georgia', serif;
+  --font-mono: 'DM Mono', 'Courier New', monospace;
+  --font-body: 'DM Sans', system-ui, sans-serif;
+
+  --max-width: 1080px;
+}

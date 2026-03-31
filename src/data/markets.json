@@ -1,0 +1,34 @@
+[
+  {
+    "id": 1,
+    "title": "Will there be a US recession in 2026?",
+    "category": "POLITICS \u00b7 US",
+    "probability": 41,
+    "volume": "$4.2M",
+    "platform": "POLYMARKET"
+  },
+  {
+    "id": 2,
+    "title": "Will NATO expand to include a new member in 2026?",
+    "category": "GEOPOLITICS",
+    "probability": 22,
+    "volume": "$1.8M",
+    "platform": "POLYMARKET"
+  },
+  {
+    "id": 3,
+    "title": "Will OpenAI go public before end of 2026?",
+    "category": "FINANCE \u00b7 AI",
+    "probability": 34,
+    "volume": "$2.9M",
+    "platform": "KALSHI"
+  },
+  {
+    "id": 4,
+    "title": "Will a Premier League club win the Champions League 2025/26?",
+    "category": "SPORTS \u00b7 FOOTBALL",
+    "probability": 55,
+    "volume": "$890K",
+    "platform": "POLYMARKET"
+  }
+]

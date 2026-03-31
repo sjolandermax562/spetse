@@ -1,0 +1,266 @@
+.convictions {
+  position: relative;
+  z-index: 1;
+  padding: 6rem 2rem;
+}
+
+.convictions__inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+
+.convictions__top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 2rem;
+}
+
+.convictions__label {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  margin: 0 0 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.convictions__label-line {
+  display: inline-block;
+  width: 50px;
+  height: 1px;
+  background: var(--color-text-muted);
+  opacity: 0.4;
+}
+
+.convictions__title {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 6vw, 3.5rem);
+  font-weight: 400;
+  color: var(--color-text);
+  letter-spacing: 0.02em;
+  margin: 0;
+  line-height: 1.1;
+}
+
+.convictions__tabs {
+  display: flex;
+  gap: 0;
+  margin-bottom: 2.5rem;
+}
+
+.convictions__tab {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.6rem 1.4rem;
+  background: none;
+  border: 1px solid var(--color-card-border);
+  color: var(--color-text-muted);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.convictions__tab:first-child {
+  border-right: none;
+}
+
+.convictions__tab:hover {
+  color: var(--color-text);
+}
+
+.convictions__tab--active {
+  color: var(--color-text);
+  background: rgba(232, 217, 181, 0.06);
+}
+
+.convictions__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1px;
+  border: 1px solid var(--color-card-border);
+}
+
+.convictions__empty {
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+  font-style: italic;
+  padding: 3rem;
+  text-align: center;
+  grid-column: 1 / -1;
+}
+
+/* Card */
+.conviction-card {
+  background: var(--color-card-bg);
+  border: 1px solid var(--color-card-border);
+  padding: 1.75rem;
+  transition: background 0.25s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.conviction-card:hover {
+  background: rgba(18, 46, 74, 0.7);
+}
+
+.conviction-card__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.conviction-card__category {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  font-weight: 500;
+  color: var(--color-text-muted);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.conviction-card__badge {
+  font-family: var(--font-mono);
+  font-size: 0.55rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.2rem 0.6rem;
+  border: 1px solid;
+}
+
+.conviction-card__badge--live {
+  color: var(--color-accent);
+  border-color: var(--color-accent);
+}
+
+.conviction-card__badge--expired {
+  color: var(--color-text-muted);
+  border-color: var(--color-card-border-hover);
+}
+
+.conviction-card__title {
+  font-family: var(--font-display);
+  font-size: clamp(1.05rem, 2vw, 1.25rem);
+  font-weight: 500;
+  color: var(--color-text);
+  margin: 0 0 1.25rem;
+  line-height: 1.35;
+}
+
+.conviction-card__prob {
+  display: flex;
+  align-items: baseline;
+  gap: 0.35rem;
+  margin-bottom: 0.5rem;
+}
+
+.conviction-card__prob-num {
+  font-family: var(--font-display);
+  font-size: 2.8rem;
+  font-weight: 400;
+  color: var(--color-text);
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+.conviction-card__prob-label {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 500;
+  color: var(--color-text-muted);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.conviction-card__bar-track {
+  width: 100%;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.04);
+  margin-bottom: 1.25rem;
+}
+
+.conviction-card__bar-fill {
+  height: 100%;
+  background: var(--color-text);
+  opacity: 0.5;
+  transition: width 0.6s ease;
+}
+
+.conviction-card__thesis {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  line-height: 1.65;
+  margin: 0;
+  flex: 1;
+}
+
+.conviction-card__footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1.25rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--color-card-border);
+}
+
+.conviction-card__platform {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+}
+
+.conviction-card__date {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  font-weight: 400;
+  color: var(--color-text-muted);
+  letter-spacing: 0.05em;
+  opacity: 0.7;
+}
+
+.conviction-card__expired-result {
+  margin-bottom: 1rem;
+}
+
+.conviction-card__result {
+  font-family: var(--font-mono);
+  font-size: 0.55rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.2rem 0.6rem;
+  border: 1px solid;
+}
+
+.conviction-card__result--correct {
+  color: var(--color-accent);
+  border-color: var(--color-accent);
+}
+
+.conviction-card__result--incorrect {
+  color: #E8A838;
+  border-color: #E8A838;
+}
+
+@media (max-width: 768px) {
+  .convictions {
+    padding: 4rem 1.25rem;
+  }
+
+  .convictions__grid {
+    grid-template-columns: 1fr;
+  }
+}

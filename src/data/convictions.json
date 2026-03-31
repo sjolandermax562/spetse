@@ -1,0 +1,49 @@
+[
+  {
+    "id": 1,
+    "title": "Trump approval above 45% by end of Q2?",
+    "category": "POLITICS \u00b7 US",
+    "status": "live",
+    "position": "YES",
+    "probability": 62,
+    "openedDate": "Mar 28, 2026",
+    "expiresDate": "Jun 30, 2026",
+    "platform": "POLYMARKET",
+    "thesis": "Market has been climbing since the latest jobs report. Sentiment shifting faster than news cycle suggests."
+  },
+  {
+    "id": 2,
+    "title": "Fed cuts rates before June 2026?",
+    "category": "FINANCE \u00b7 MACRO",
+    "status": "live",
+    "position": "YES",
+    "probability": 38,
+    "openedDate": "Mar 25, 2026",
+    "expiresDate": "Jun 01, 2026",
+    "platform": "KALSHI",
+    "thesis": "Market pricing in less than one cut. Powell's language has been consistently hawkish \u2014 crowd may be underreacting."
+  },
+  {
+    "id": 3,
+    "title": "Labour wins with majority in 2024 UK election?",
+    "category": "POLITICS \u00b7 UK",
+    "status": "expired",
+    "result": "correct",
+    "openedDate": "Jan 10, 2024",
+    "closedDate": "Jul 04, 2024",
+    "platform": "POLYMARKET",
+    "thesis": "Polling momentum was undeniable. Markets were slow to price in the full extent of the Labour swing."
+  },
+  {
+    "id": 4,
+    "title": "OKC Thunder win the 2026 NBA Championship?",
+    "category": "SPORTS \u00b7 NBA",
+    "status": "live",
+    "position": "YES",
+    "probability": 28,
+    "openedDate": "Mar 20, 2026",
+    "expiresDate": "Jun 30, 2026",
+    "platform": "POLYMARKET",
+    "thesis": "Young core peaking at the right time. Regular season dominance often translates in the West."
+  }
+]

@@ -1,0 +1,173 @@
+.markets {
+  position: relative;
+  z-index: 1;
+  padding: 6rem 2rem;
+}
+
+.markets__inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+
+.markets__label {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  margin: 0 0 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.markets__label-line {
+  display: inline-block;
+  width: 50px;
+  height: 1px;
+  background: var(--color-text-muted);
+  opacity: 0.4;
+}
+
+.markets__title {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 6vw, 3.5rem);
+  font-weight: 400;
+  color: var(--color-text);
+  letter-spacing: 0.02em;
+  margin: 0 0 3rem;
+  line-height: 1.1;
+}
+
+.markets__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.markets__empty {
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+  font-style: italic;
+  padding: 3rem;
+  text-align: center;
+  grid-column: 1 / -1;
+}
+
+/* Card */
+.market-card {
+  padding: 2.25rem 2rem;
+  border-bottom: 1px solid var(--color-card-border);
+  transition: background 0.25s ease;
+}
+
+/* Vertical divider: odd cards (left column) get a right border */
+.market-card:nth-child(odd) {
+  border-right: 1px solid var(--color-card-border);
+}
+
+/* Top border on first row */
+.market-card:nth-child(1),
+.market-card:nth-child(2) {
+  border-top: 1px solid var(--color-card-border);
+}
+
+.market-card:hover {
+  background: rgba(232, 217, 181, 0.02);
+}
+
+.market-card__category {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  font-weight: 500;
+  color: var(--color-text-muted);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 0.6rem;
+}
+
+.market-card__title {
+  font-family: var(--font-body);
+  font-size: clamp(0.95rem, 1.8vw, 1.1rem);
+  font-weight: 400;
+  color: var(--color-text);
+  margin: 0 0 2rem;
+  line-height: 1.45;
+}
+
+.market-card__prob {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  margin-bottom: 0.6rem;
+}
+
+.market-card__prob-num {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 4vw, 3rem);
+  font-weight: 400;
+  color: var(--color-text);
+  line-height: 1;
+  font-style: italic;
+}
+
+.market-card__prob-label {
+  font-family: var(--font-mono);
+  font-size: 0.55rem;
+  font-weight: 500;
+  color: var(--color-text-muted);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.market-card__bar {
+  width: 35%;
+  height: 2px;
+  background: var(--color-text);
+  opacity: 0.25;
+  margin-bottom: 1.5rem;
+}
+
+.market-card__footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.market-card__volume {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  font-weight: 400;
+  color: var(--color-text-muted);
+  letter-spacing: 0.04em;
+  opacity: 0.6;
+}
+
+.market-card__platform {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  font-weight: 500;
+  color: var(--color-text-muted);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 768px) {
+  .markets {
+    padding: 4rem 1.25rem;
+  }
+
+  .markets__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .market-card:nth-child(odd) {
+    border-right: none;
+  }
+
+  .market-card:nth-child(2) {
+    border-top: none;
+  }
+}

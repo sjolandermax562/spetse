@@ -1,0 +1,132 @@
+.feed {
+  position: relative;
+  z-index: 1;
+  padding: 6rem 2rem 8rem;
+}
+
+.feed__inner {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.feed__label {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  margin: 0 0 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.feed__label-line {
+  display: inline-block;
+  width: 50px;
+  height: 1px;
+  background: var(--color-text-muted);
+  opacity: 0.4;
+}
+
+.feed__title {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 6vw, 3.5rem);
+  font-weight: 400;
+  color: var(--color-text);
+  letter-spacing: 0.02em;
+  margin: 0 0 0.75rem;
+  line-height: 1.1;
+}
+
+.feed__handle {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 400;
+  color: var(--color-text-muted);
+  letter-spacing: 0.06em;
+  margin: 0 0 3rem;
+}
+
+.feed__posts {
+  display: flex;
+  flex-direction: column;
+}
+
+.feed__post {
+  padding: 1.75rem 0;
+  border-bottom: 1px solid var(--color-card-border);
+}
+
+.feed__post:first-child {
+  border-top: 1px solid var(--color-card-border);
+}
+
+.feed__post-text {
+  font-family: var(--font-body);
+  font-size: clamp(0.9rem, 1.6vw, 1.05rem);
+  color: var(--color-text-muted);
+  line-height: 1.7;
+  margin: 0 0 1rem;
+}
+
+.feed__post-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.feed__post-date {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 400;
+  color: var(--color-text-muted);
+  letter-spacing: 0.05em;
+  opacity: 0.6;
+}
+
+.feed__post-views {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 400;
+  color: var(--color-text-muted);
+  letter-spacing: 0.05em;
+  opacity: 0.6;
+}
+
+.feed__post-meta .feed__post-date::after {
+  content: '\00B7';
+  margin-left: 0.75rem;
+  opacity: 0.4;
+}
+
+/* CTA */
+.feed__cta {
+  text-align: center;
+  padding-top: 3.5rem;
+}
+
+.feed__cta-btn {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 0.85rem 3rem;
+  background: var(--color-text);
+  color: var(--color-bg);
+  transition: background 0.2s ease;
+}
+
+.feed__cta-btn:hover {
+  background: #fff;
+}
+
+@media (max-width: 768px) {
+  .feed {
+    padding: 4rem 1.25rem 6rem;
+  }
+}
