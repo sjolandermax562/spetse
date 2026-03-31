@@ -58,9 +58,18 @@ export default function MarketsSection() {
 
               <div className="market-card__footer">
                 <span className="market-card__volume">{market.volume} volume</span>
-                {market.platform && (
-                  <span className="market-card__platform">{market.platform} &rarr;</span>
-                )}
+                <div className="market-card__links">
+                  {market.polymarketLink && (
+                    <a className="market-card__link" href={market.polymarketLink} target="_blank" rel="noopener noreferrer">
+                      View on Polymarket
+                    </a>
+                  )}
+                  {market.kalshiLink && (
+                    <a className="market-card__link" href={market.kalshiLink} target="_blank" rel="noopener noreferrer">
+                      View on Kalshi
+                    </a>
+                  )}
+                </div>
               </div>
             </article>
           ))}

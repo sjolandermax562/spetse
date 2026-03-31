@@ -31,6 +31,8 @@ export default async function handler(req, res) {
         probability: Number(row.get('probability')) || 0,
         volume: row.get('volume') || '',
         platform: row.get('platform') || '',
+        polymarketLink: row.get('polymarketLink') || '',
+        kalshiLink: row.get('kalshiLink') || '',
       }))
 
     res.setHeader('Cache-Control', 's-maxage=300')
