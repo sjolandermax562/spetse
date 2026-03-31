@@ -30,6 +30,7 @@ const values = [
 
 export default function AboutSection() {
   const sectionRef = useRef(null)
+  const valuesRef = useRef(null)
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -50,11 +51,42 @@ export default function AboutSection() {
             y: 25, opacity: 0, duration: 0.5, stagger: 0.12, ease: 'expo.out',
           })
         }
-        const items = sectionRef.current?.querySelectorAll('.about__value')
+
+        // Ladder animation for values
+        const items = valuesRef.current?.querySelectorAll('.about__value')
         if (items?.length) {
-          gsap.from(items, {
-            scrollTrigger: { trigger: items[0], start: 'top 85%' },
-            y: 30, opacity: 0, duration: 0.5, stagger: 0.1, ease: 'expo.out',
+          items.forEach((item, i) => {
+            // Each item slides in from left with increasing indent
+            gsap.fromTo(item, {
+              x: -60,
+              opacity: 0,
+            }, {
+              x: 0,
+              opacity: 1,
+              duration: 0.7,
+              ease: 'expo.out',
+              scrollTrigger: {
+                trigger: item,
+                start: 'top 88%',
+                end: 'top 40%',
+                toggleActions: 'play reverse play reverse',
+              },
+            })
+
+            // The progress line grows as you scroll through it
+            const line = item.querySelector('.about__value-line')
+            if (line) {
+              gsap.fromTo(line, { scaleX: 0 }, {
+                scaleX: 1,
+                ease: 'none',
+                scrollTrigger: {
+                  trigger: item,
+                  start: 'top 75%',
+                  end: 'bottom 50%',
+                  scrub: 0.5,
+                },
+              })
+            }
           })
         }
       })
@@ -92,14 +124,19 @@ export default function AboutSection() {
           </p>
         </div>
 
-        <div className="about__values">
-          {values.map(v => (
-            <div key={v.num} className="about__value">
+        <div className="about__values" ref={valuesRef}>
+          {values.map((v, i) => (
+            <div
+              key={v.num}
+              className="about__value"
+              style={{ paddingLeft: `${i * 2.5}rem` }}
+            >
               <span className="about__value-num">{v.num}</span>
               <div className="about__value-content">
                 <h3 className="about__value-title">{v.title}</h3>
                 <p className="about__value-text">{v.text}</p>
               </div>
+              <div className="about__value-line" />
             </div>
           ))}
         </div>
