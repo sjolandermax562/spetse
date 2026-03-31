@@ -1,15 +1,18 @@
 import { useEffect, useRef } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import feedData from '../data/feed.json'
+import useSheetData from '../hooks/useSheetData'
 import './FeedPage.css'
 
 gsap.registerPlugin(ScrollTrigger)
 
 export default function FeedSection() {
   const sectionRef = useRef(null)
+  const { data: feedData, loading } = useSheetData('/api/tweets')
 
   useEffect(() => {
+    if (!feedData?.length) return
+
     const ctx = gsap.context(() => {
       const mm = gsap.matchMedia()
       mm.add('(prefers-reduced-motion: no-preference)', () => {
@@ -32,7 +35,7 @@ export default function FeedSection() {
       return () => mm.revert()
     }, sectionRef)
     return () => ctx.revert()
-  }, [])
+  }, [feedData])
 
   return (
     <section className="feed" id="feed" ref={sectionRef}>
@@ -44,13 +47,18 @@ export default function FeedSection() {
         <div className="feed__posts">
           {feedData.map((post, i) => (
             <article key={post.id} className={`feed__post${i === 0 ? ' feed__post--latest' : ''}`}>
-              <p className="feed__post-text">{post.text}</p>
-              <div className="feed__post-meta">
-                <span className="feed__post-date">{post.date}</span>
-                {post.views && <span className="feed__post-views">{post.views} views</span>}
-              </div>
+              <a className="feed__post-link" href={post.url} target="_blank" rel="noopener noreferrer">
+                <p className="feed__post-text">{post.text}</p>
+                <div className="feed__post-meta">
+                  <span className="feed__post-date">{post.date}</span>
+                  {post.views && <span className="feed__post-views">{post.views.toLocaleString()} views</span>}
+                </div>
+              </a>
             </article>
           ))}
+          {!loading && feedData.length === 0 && (
+            <p className="feed__empty">No tweets yet.</p>
+          )}
         </div>
 
         <div className="feed__cta">
