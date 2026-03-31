@@ -1,15 +1,18 @@
 import { useEffect, useRef } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import marketsData from '../data/markets.json'
+import useSheetData from '../hooks/useSheetData'
 import './MarketsPage.css'
 
 gsap.registerPlugin(ScrollTrigger)
 
 export default function MarketsSection() {
   const sectionRef = useRef(null)
+  const { data: marketsData, loading } = useSheetData('/api/markets')
 
   useEffect(() => {
+    if (!marketsData?.length) return
+
     const ctx = gsap.context(() => {
       const mm = gsap.matchMedia()
       mm.add('(prefers-reduced-motion: no-preference)', () => {
@@ -32,7 +35,7 @@ export default function MarketsSection() {
       return () => mm.revert()
     }, sectionRef)
     return () => ctx.revert()
-  }, [])
+  }, [marketsData])
 
   return (
     <section className="markets" id="markets" ref={sectionRef}>
@@ -61,7 +64,7 @@ export default function MarketsSection() {
               </div>
             </article>
           ))}
-          {marketsData.length === 0 && (
+          {!loading && marketsData.length === 0 && (
             <p className="markets__empty">No markets being tracked right now.</p>
           )}
         </div>

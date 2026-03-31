@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import convictionsData from '../data/convictions.json'
+import useSheetData from '../hooks/useSheetData'
 import './ConvictionsPage.css'
 
 gsap.registerPlugin(ScrollTrigger)
@@ -9,12 +9,15 @@ gsap.registerPlugin(ScrollTrigger)
 export default function ConvictionsSection() {
   const [filter, setFilter] = useState('live')
   const sectionRef = useRef(null)
+  const { data: convictionsData, loading } = useSheetData('/api/convictions')
 
   const filtered = convictionsData.filter(c =>
     filter === 'live' ? c.status === 'live' : c.status === 'expired'
   )
 
   useEffect(() => {
+    if (!convictionsData?.length) return
+
     const ctx = gsap.context(() => {
       const mm = gsap.matchMedia()
       mm.add('(prefers-reduced-motion: no-preference)', () => {
@@ -30,9 +33,11 @@ export default function ConvictionsSection() {
       return () => mm.revert()
     }, sectionRef)
     return () => ctx.revert()
-  }, [])
+  }, [convictionsData])
 
   useEffect(() => {
+    if (!filtered?.length) return
+
     const ctx = gsap.context(() => {
       const cards = sectionRef.current?.querySelectorAll('.conviction-card')
       if (!cards?.length) return
@@ -45,7 +50,7 @@ export default function ConvictionsSection() {
       return () => mm.revert()
     }, sectionRef)
     return () => ctx.revert()
-  }, [filter])
+  }, [filter, filtered])
 
   return (
     <section className="convictions" id="convictions" ref={sectionRef}>
@@ -76,7 +81,7 @@ export default function ConvictionsSection() {
           {filtered.map(conviction => (
             <ConvictionCard key={conviction.id} data={conviction} />
           ))}
-          {filtered.length === 0 && (
+          {!loading && filtered.length === 0 && (
             <p className="convictions__empty">No {filter} convictions yet.</p>
           )}
         </div>
