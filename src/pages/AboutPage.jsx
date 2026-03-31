@@ -129,7 +129,10 @@ export default function AboutSection() {
             <div
               key={v.num}
               className="about__value"
-              style={{ paddingLeft: `${i * 2.5}rem` }}
+              style={{
+                paddingLeft: `${i * 2.5}rem`,
+                filter: `blur(${i * 0.4}px)`,
+              }}
             >
               <span className="about__value-num">{v.num}</span>
               <div className="about__value-content">
