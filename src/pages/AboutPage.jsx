@@ -9,17 +9,17 @@ const values = [
   {
     num: '01',
     title: 'Clarity over complexity',
-    text: "We explain what markets are saying in plain terms. No jargon, no overcomplicated takes.",
+    text: "We explain what markets are saying in plain terms.",
   },
   {
     num: '02',
-    title: 'Conviction over consensus',
-    text: "We share what we actually think — not what the crowd wants to hear.",
+    title: 'Conviction over hype',
+    text: "We share what we actually think, not what the crowd wants to hear.",
   },
   {
     num: '03',
     title: 'Probability thinking',
-    text: "The world is probabilistic. We help people see it that way.",
+    text: "Most people think in yes or no. We think in percentages.",
   },
   {
     num: '04',
