@@ -104,23 +104,18 @@ export default function AboutSection() {
         <div className="about__body">
           <p className="about__text">
             SPETSE is a <strong>media and intelligence account</strong> focused on prediction markets.
-            We track Polymarket, Kalshi, and other platforms — and break down what the odds are actually saying.
+            We track markets across Polymarket and Kalshi, and break down what the odds are actually saying.
           </p>
           <p className="about__text">
-            Prediction markets are the most honest signal in the world. They cut through noise,
-            punish overconfidence, and price in information faster than any news cycle. We think
-            more people should be paying attention.
+            <strong>Prediction markets</strong> are platforms where people trade on the outcome of real-world events
+            such as elections, conflicts, economic shifts, and more. Prices move in real time based on what
+            traders believe will happen, creating a live probability for every outcome. We think more people
+            should be paying attention.
           </p>
           <p className="about__text">
             We are <strong>not a trading group</strong>. We are not a platform. We are not giving financial advice.
-            We are a sharp, clean media account that believes <strong>probability thinking matters</strong> — and
-            makes for better decisions.
-          </p>
-        </div>
-
-        <div className="about__origin">
-          <p className="about__origin-text">
-            Named after Spetses — a small Greek island known for its clarity and independence.
+            We break down markets, give you our honest conviction on where the odds are wrong, and
+            <strong> let you decide for yourself</strong>.
           </p>
         </div>
 
