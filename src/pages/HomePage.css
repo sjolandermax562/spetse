@@ -7,21 +7,21 @@
   align-items: center;
   justify-content: center;
   text-align: center;
-  padding: 120px 3rem 6rem;
+  padding: 80px 2rem 4rem;
 }
 
 .home__center {
   display: flex;
   flex-direction: column;
   align-items: center;
-  max-width: 960px;
+  max-width: 860px;
 }
 
 .home__logo {
-  width: 420px;
-  height: 420px;
+  width: 380px;
+  height: 380px;
   object-fit: contain;
-  margin-bottom: 3.5rem;
+  margin-bottom: 3rem;
 }
 
 .home__label {
@@ -53,15 +53,14 @@
   font-size: clamp(1.1rem, 2.5vw, 1.35rem);
   font-weight: 400;
   color: var(--color-text-muted);
-  line-height: 1.8;
-  margin: 3.5rem 0 0;
-  max-width: 600px;
+  line-height: 1.7;
+  margin: 2.75rem 0 0;
 }
 
 .home__buttons {
   display: flex;
   gap: 0;
-  margin-top: 3.5rem;
+  margin-top: 3rem;
 }
 
 .home__btn {
@@ -97,12 +96,7 @@
 
 @media (max-width: 768px) {
   .home {
-    padding: 100px 1.5rem 4rem;
-  }
-
-  .home__logo {
-    width: 280px;
-    height: 280px;
+    padding: 80px 1.25rem 3rem;
   }
 
   .home__buttons {
