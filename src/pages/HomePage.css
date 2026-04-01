@@ -14,28 +14,28 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  max-width: 700px;
+  max-width: 860px;
 }
 
 .home__logo {
-  width: 320px;
-  height: 320px;
+  width: 380px;
+  height: 380px;
   object-fit: contain;
-  margin-bottom: 2.5rem;
+  margin-bottom: 3rem;
 }
 
 .home__label {
   font-family: var(--font-mono);
-  font-size: 0.8rem;
+  font-size: 0.9rem;
   font-weight: 500;
   letter-spacing: 0.25em;
   color: var(--color-text-muted);
-  margin: 0 0 1.25rem;
+  margin: 0 0 1.5rem;
 }
 
 .home__wordmark {
   font-family: var(--font-display);
-  font-size: clamp(4.5rem, 15vw, 9rem);
+  font-size: clamp(5.5rem, 18vw, 11rem);
   font-weight: 400;
   letter-spacing: 0.12em;
   color: var(--color-text);
@@ -50,27 +50,27 @@
 
 .home__description {
   font-family: var(--font-body);
-  font-size: clamp(1rem, 2.2vw, 1.25rem);
+  font-size: clamp(1.1rem, 2.5vw, 1.35rem);
   font-weight: 400;
   color: var(--color-text-muted);
   line-height: 1.7;
-  margin: 2.25rem 0 0;
+  margin: 2.75rem 0 0;
 }
 
 .home__buttons {
   display: flex;
   gap: 0;
-  margin-top: 2.5rem;
+  margin-top: 3rem;
 }
 
 .home__btn {
   font-family: var(--font-mono);
-  font-size: 0.8rem;
+  font-size: 0.85rem;
   font-weight: 500;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   text-decoration: none;
-  padding: 0.9rem 2.5rem;
+  padding: 1rem 3rem;
   transition: all 0.25s ease;
 }
 
