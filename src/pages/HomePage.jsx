@@ -49,7 +49,7 @@ export default function HeroSection() {
         </h1>
 
         <p className="home__description">
-          We track prediction markets across politics, finance, and sports —<br />
+          We track prediction markets across politics, finance, tech and sports —<br />
           and break down what's actually moving, and why.
         </p>
 
