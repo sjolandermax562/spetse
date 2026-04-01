@@ -132,7 +132,7 @@ function ConvictionCard({ data }) {
         <>
           <div className="conviction-card__expired-result">
             <span className={`conviction-card__result conviction-card__result--${data.result}`}>
-              {data.result === 'correct' ? 'WON' : 'LOST'}
+              {data.result === 'yes' ? 'WON' : 'LOST'}
             </span>
           </div>
           {data.thesisLink && (
