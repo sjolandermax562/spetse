@@ -28,7 +28,12 @@ export default async function handler(req, res) {
         id: i + 1,
         title: row.get('title') || '',
         category: row.get('category') || '',
-        status: row.get('status') || '',
+        status: (() => {
+          const s = row.get('status') || ''
+          const exp = row.get('expiresDate')
+          if (s !== 'expired' && exp && new Date(exp) < new Date()) return 'expired'
+          return s
+        })(),
         position: row.get('position') || '',
         probability: Number(row.get('probability')) || 0,
         openedDate: row.get('openedDate') || '',
