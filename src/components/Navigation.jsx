@@ -12,12 +12,6 @@ export default function Navigation() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [menuOpen])
 
-  // Prevent body scroll when mobile menu is open
-  useEffect(() => {
-    document.body.style.overflow = menuOpen ? 'hidden' : ''
-    return () => { document.body.style.overflow = '' }
-  }, [menuOpen])
-
   const links = [
     { id: 'hero', label: 'Home' },
     { id: 'convictions', label: 'Convictions' },
@@ -33,53 +27,51 @@ export default function Navigation() {
   }
 
   return (
-    <>
-      <nav className="nav">
-        <div className="nav__inner">
-          <a href="#hero" className="nav__logo-link" onClick={(e) => handleClick(e, 'hero')}>
-            <img src="/logo.png" alt="SPETSE" className="nav__logo-img" />
-            <span className="nav__brand">SPETSE</span>
-          </a>
+    <nav className="nav">
+      <div className="nav__inner">
+        <a href="#hero" className="nav__logo-link" onClick={(e) => handleClick(e, 'hero')}>
+          <img src="/logo.png" alt="SPETSE" className="nav__logo-img" />
+          <span className="nav__brand">SPETSE</span>
+        </a>
 
-          <div className="nav__links nav__links--desktop">
-            {links.map(link => (
-              <a
-                key={link.id}
-                href={`#${link.id}`}
-                className="nav__link"
-                onClick={(e) => handleClick(e, link.id)}
-              >
-                {link.label}
-              </a>
-            ))}
-          </div>
-
-          <button
-            className={`nav__hamburger${menuOpen ? ' nav__hamburger--open' : ''}`}
-            onClick={() => setMenuOpen(!menuOpen)}
-            aria-label="Toggle menu"
-            aria-expanded={menuOpen}
-          >
-            <span />
-            <span />
-            <span />
-          </button>
+        <div className="nav__links">
+          {links.map(link => (
+            <a
+              key={link.id}
+              href={`#${link.id}`}
+              className="nav__link"
+              onClick={(e) => handleClick(e, link.id)}
+            >
+              {link.label}
+            </a>
+          ))}
         </div>
-      </nav>
 
-      {/* Mobile menu rendered outside <nav> so backdrop-filter doesn't trap fixed positioning */}
-      <div className={`nav__mobile-menu${menuOpen ? ' nav__mobile-menu--open' : ''}`}>
+        <button
+          className={`nav__hamburger${menuOpen ? ' nav__hamburger--open' : ''}`}
+          onClick={() => setMenuOpen(!menuOpen)}
+          aria-label="Toggle menu"
+          aria-expanded={menuOpen}
+        >
+          <span />
+          <span />
+          <span />
+        </button>
+      </div>
+
+      {/* Dropdown menu — position:absolute stays within nav stacking context, no fixed-inside-backdrop-filter bug */}
+      <div className={`nav__dropdown${menuOpen ? ' nav__dropdown--open' : ''}`}>
         {links.map(link => (
           <a
             key={link.id}
             href={`#${link.id}`}
-            className="nav__link"
+            className="nav__dropdown-link"
             onClick={(e) => handleClick(e, link.id)}
           >
             {link.label}
           </a>
         ))}
       </div>
-    </>
+    </nav>
   )
 }
