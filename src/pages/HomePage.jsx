@@ -9,9 +9,6 @@ export default function HeroSection() {
     const ctx = gsap.context(() => {
       const mm = gsap.matchMedia()
       mm.add('(prefers-reduced-motion: no-preference)', () => {
-        gsap.from('.home__logo', {
-          scale: 0.8, opacity: 0, duration: 1, delay: 0.3, ease: 'expo.out',
-        })
         gsap.from('.home__label', {
           y: 15, opacity: 0, duration: 0.6, delay: 0.8, ease: 'expo.out',
         })
@@ -38,8 +35,6 @@ export default function HeroSection() {
   return (
     <section className="home" id="hero" ref={sectionRef}>
       <div className="home__center">
-        <img src="/logo.png" alt="SPETSE logo" className="home__logo" />
-
         <p className="home__label">PREDICTION MARKETS INTELLIGENCE</p>
 
         <h1 className="home__wordmark">
