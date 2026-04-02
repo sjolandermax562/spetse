@@ -92,16 +92,32 @@
   transform: rotate(-45deg) translate(5px, -5px);
 }
 
+/* Mobile overlay menu — rendered outside <nav> to avoid backdrop-filter clipping */
+.nav__mobile-menu {
+  display: none;
+}
+
+.nav__hamburger {
+  display: none;
+}
+
 @media (max-width: 768px) {
   .nav__inner {
     padding: 1rem 1.5rem;
   }
 
-  .nav__hamburger {
-    display: flex;
+  .nav__links--desktop {
+    display: none;
   }
 
-  .nav__links {
+  .nav__hamburger {
+    display: flex;
+    position: relative;
+    z-index: 300;
+  }
+
+  .nav__mobile-menu {
+    display: flex;
     position: fixed;
     top: 0;
     left: 0;
@@ -118,12 +134,12 @@
     transition: opacity 0.3s ease;
   }
 
-  .nav__links--open {
+  .nav__mobile-menu--open {
     opacity: 1;
     pointer-events: all;
   }
 
-  .nav__link {
-    font-size: 0.85rem;
+  .nav__mobile-menu .nav__link {
+    font-size: 1.1rem;
   }
 }
