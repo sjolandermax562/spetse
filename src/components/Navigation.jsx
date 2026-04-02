@@ -1,8 +1,22 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import './Navigation.css'
 
 export default function Navigation() {
   const [menuOpen, setMenuOpen] = useState(false)
+
+  // Close mobile menu on scroll
+  useEffect(() => {
+    if (!menuOpen) return
+    const handleScroll = () => setMenuOpen(false)
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [menuOpen])
+
+  // Prevent body scroll when mobile menu is open
+  useEffect(() => {
+    document.body.style.overflow = menuOpen ? 'hidden' : ''
+    return () => { document.body.style.overflow = '' }
+  }, [menuOpen])
 
   const links = [
     { id: 'hero', label: 'Home' },
