@@ -1,4 +1,5 @@
 import { Routes, Route } from 'react-router-dom'
+import { Analytics } from '@vercel/analytics/react'
 import BackgroundLines from './components/BackgroundLines'
 import Navigation from './components/Navigation'
 import HeroSection from './pages/HomePage'
@@ -29,14 +30,17 @@ function PublicSite() {
 
 export default function App() {
   return (
-    <Routes>
-      <Route path="/" element={<PublicSite />} />
-      <Route path="/admin/login" element={<LoginPage />} />
-      <Route path="/admin" element={<AdminLayout />}>
-        <Route index element={<AdminMarketsPage />} />
-        <Route path="markets" element={<AdminMarketsPage />} />
-        <Route path="convictions" element={<AdminConvictionsPage />} />
-      </Route>
-    </Routes>
+    <>
+      <Routes>
+        <Route path="/" element={<PublicSite />} />
+        <Route path="/admin/login" element={<LoginPage />} />
+        <Route path="/admin" element={<AdminLayout />}>
+          <Route index element={<AdminMarketsPage />} />
+          <Route path="markets" element={<AdminMarketsPage />} />
+          <Route path="convictions" element={<AdminConvictionsPage />} />
+        </Route>
+      </Routes>
+      <Analytics />
+    </>
   )
 }
