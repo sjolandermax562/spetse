@@ -62,7 +62,7 @@ export default async function handler(req, res) {
           thesisLink: row.get('thesisLink') || '',
         }))
 
-      res.setHeader('Cache-Control', 'smaxage=60')
+      res.setHeader('Cache-Control', 's-maxage=60')
       return res.status(200).json(data)
     }
 
