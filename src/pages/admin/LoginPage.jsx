@@ -36,6 +36,8 @@ export default function LoginPage() {
   return (
     <div className="login-page">
       <form className="login-card" onSubmit={handleSubmit}>
+        <div className="login-card-label">ADMIN ACCESS</div>
+        <div className="login-card-line" />
         <h1>SPETSE</h1>
         <p>Admin Panel</p>
         <div className="login-field">

@@ -4,6 +4,7 @@
   align-items: center;
   justify-content: center;
   background: var(--color-bg);
+  background-image: radial-gradient(ellipse at 50% 0%, rgba(74, 222, 128, 0.03) 0%, transparent 60%);
   font-family: var(--font-body);
 }
 
@@ -14,6 +15,38 @@
   padding: 48px 40px;
   width: 100%;
   max-width: 400px;
+  box-shadow: 0 0 80px rgba(74, 222, 128, 0.04), 0 24px 48px rgba(0, 0, 0, 0.3);
+  animation: login-card-enter 0.4s ease-out;
+}
+
+@keyframes login-card-enter {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.login-card-label {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  text-align: center;
+  margin-bottom: 8px;
+}
+
+.login-card-line {
+  width: 40px;
+  height: 1px;
+  background: var(--color-accent);
+  opacity: 0.4;
+  margin: 0 auto 28px;
 }
 
 .login-card h1 {
@@ -22,6 +55,7 @@
   color: var(--color-text);
   margin: 0 0 8px;
   text-align: center;
+  letter-spacing: 0.05em;
 }
 
 .login-card p {
@@ -29,6 +63,7 @@
   text-align: center;
   margin: 0 0 32px;
   font-size: 14px;
+  letter-spacing: 0.02em;
 }
 
 .login-field {
@@ -38,9 +73,11 @@
 .login-field label {
   display: block;
   color: var(--color-text-muted);
-  font-size: 12px;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
   margin-bottom: 6px;
 }
 
@@ -54,11 +91,12 @@
   font-family: var(--font-mono);
   font-size: 14px;
   outline: none;
-  transition: border-color 0.2s;
+  transition: border-color 0.2s, box-shadow 0.2s;
 }
 
 .login-field input:focus {
   border-color: var(--color-accent);
+  box-shadow: 0 0 0 3px rgba(74, 222, 128, 0.1);
 }
 
 .login-btn {
@@ -69,15 +107,21 @@
   border: none;
   border-radius: 8px;
   font-family: var(--font-body);
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 600;
   cursor: pointer;
   margin-top: 8px;
-  transition: opacity 0.2s;
+  transition: opacity 0.2s, transform 0.1s;
+  letter-spacing: 0.02em;
 }
 
-.login-btn:hover {
+.login-btn:hover:not(:disabled) {
   opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+.login-btn:active:not(:disabled) {
+  transform: translateY(0);
 }
 
 .login-btn:disabled {
@@ -90,4 +134,11 @@
   font-size: 13px;
   text-align: center;
   margin-top: 12px;
+  animation: login-error-shake 0.3s ease;
+}
+
+@keyframes login-error-shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-4px); }
+  75% { transform: translateX(4px); }
 }

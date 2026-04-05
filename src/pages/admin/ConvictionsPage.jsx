@@ -147,13 +147,23 @@ export default function ConvictionsPage() {
                     )}
                   </td>
                   <td>{c.category}</td>
-                  <td className="admin-conv-row-status">{c.status}</td>
-                  <td>{c.position}</td>
+                  <td>
+                    <span className={`admin-conv-status admin-conv-status--${c.status || 'unknown'}`}>
+                      {c.status || '—'}
+                    </span>
+                  </td>
+                  <td>{c.position ? <span className={`admin-badge admin-badge--${c.position}`}>{c.position}</span> : '—'}</td>
                   <td className="admin-prob">{c.probability}%</td>
                   <td className="admin-conv-dates">
-                    {c.openedDate && <>{c.openedDate} → {c.expiresDate || c.closedDate || '—'}</>}
+                    {c.openedDate ? <>{c.openedDate} → {c.expiresDate || c.closedDate || '—'}</> : '—'}
                   </td>
-                  <td className="admin-conv-result">{c.result || '—'}</td>
+                  <td>
+                    {c.result ? (
+                      <span className={`admin-conv-result-badge admin-conv-result-badge--${c.result}`}>
+                        {c.result === 'yes' ? 'Correct' : 'Incorrect'}
+                      </span>
+                    ) : '—'}
+                  </td>
                   <td>
                     <div className="admin-table-actions">
                       <button className="admin-edit-btn" onClick={() => openEdit(c)}>Edit</button>

@@ -25,7 +25,10 @@ export default function AdminLayout() {
   return (
     <div className="admin-layout">
       <div className="admin-topbar">
-        <div className="admin-topbar-brand">SPETSE Admin</div>
+        <div className="admin-topbar-brand">
+          <span className="admin-topbar-brand-name">SPETSE</span>
+          <span className="admin-topbar-brand-suffix">Admin</span>
+        </div>
         <nav className="admin-topbar-nav">
           <NavLink to="/admin" end className={({ isActive }) => isActive ? 'active' : ''}>
             Markets
