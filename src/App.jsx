@@ -9,8 +9,6 @@ import AboutSection from './pages/AboutPage'
 import FeedSection from './pages/FeedPage'
 import LoginPage from './pages/admin/LoginPage'
 import AdminLayout from './pages/admin/AdminLayout'
-import AdminMarketsPage from './pages/admin/MarketsPage'
-import AdminConvictionsPage from './pages/admin/ConvictionsPage'
 import './styles/variables.css'
 import './App.css'
 
@@ -34,11 +32,7 @@ export default function App() {
       <Routes>
         <Route path="/" element={<PublicSite />} />
         <Route path="/admin/login" element={<LoginPage />} />
-        <Route path="/admin" element={<AdminLayout />}>
-          <Route index element={<AdminMarketsPage />} />
-          <Route path="markets" element={<AdminMarketsPage />} />
-          <Route path="convictions" element={<AdminConvictionsPage />} />
-        </Route>
+        <Route path="/admin/*" element={<AdminLayout />} />
       </Routes>
       <Analytics />
     </>
