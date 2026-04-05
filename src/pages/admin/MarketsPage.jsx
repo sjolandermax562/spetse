@@ -20,7 +20,7 @@ export default function MarketsPage() {
 
   const load = useCallback(async () => {
     try {
-      const res = await fetch('/api/markets')
+      const res = await fetch(`/api/markets?t=${Date.now()}`)
       const data = await res.json()
       setMarkets(data)
     } catch { setMarkets([]) }

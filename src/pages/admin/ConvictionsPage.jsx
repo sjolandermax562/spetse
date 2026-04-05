@@ -25,7 +25,7 @@ export default function ConvictionsPage() {
 
   const load = useCallback(async () => {
     try {
-      const res = await fetch('/api/convictions')
+      const res = await fetch(`/api/convictions?t=${Date.now()}`)
       const data = await res.json()
       setConvictions(data)
     } catch { setConvictions([]) }
