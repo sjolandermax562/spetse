@@ -265,3 +265,11 @@
   font-size: 13px;
   margin-top: 8px;
 }
+
+.admin-optional {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  color: var(--color-text-muted);
+  letter-spacing: 0.05em;
+  font-weight: 400;
+}

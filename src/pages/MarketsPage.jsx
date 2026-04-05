@@ -49,17 +49,21 @@ export default function MarketsSection() {
               <span className="market-card__category">{market.category}</span>
               <h3 className="market-card__title">{market.title}</h3>
 
-              <div className="market-card__prob">
-                <span className="market-card__prob-num">{market.probability}%</span>
-                <span className="market-card__prob-label">PROBABILITY</span>
-              </div>
+              {market.probability != null && (
+                <>
+                  <div className="market-card__prob">
+                    <span className="market-card__prob-num">{market.probability}%</span>
+                    <span className="market-card__prob-label">PROBABILITY</span>
+                  </div>
 
-              <div className="market-card__bar-track">
-                <div
-                  className="market-card__bar-fill"
-                  style={{ width: `${market.probability}%` }}
-                />
-              </div>
+                  <div className="market-card__bar-track">
+                    <div
+                      className="market-card__bar-fill"
+                      style={{ width: `${market.probability}%` }}
+                    />
+                  </div>
+                </>
+              )}
 
               <div className="market-card__footer">
                 <div className="market-card__links">

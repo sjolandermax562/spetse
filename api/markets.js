@@ -47,7 +47,7 @@ export default async function handler(req, res) {
           rowIndex: i,
           title: row.get('title') || '',
           category: row.get('category') || '',
-          probability: Number(row.get('probability')) || 0,
+          probability: row.get('probability') ? Number(row.get('probability')) : null,
           platform: row.get('platform') || '',
           polymarketLink: row.get('polymarketLink') || '',
           kalshiLink: row.get('kalshiLink') || '',

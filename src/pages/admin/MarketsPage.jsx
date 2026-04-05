@@ -133,7 +133,7 @@ export default function MarketsPage() {
                 <tr key={m.rowIndex}>
                   <td>{m.title}</td>
                   <td>{m.category}</td>
-                  <td className="admin-prob">{m.probability}%</td>
+                  <td className="admin-prob">{m.probability != null ? `${m.probability}%` : '—'}</td>
                   <td>{m.platform}</td>
                   <td>
                     {m.polymarketLink && <a className="admin-link" href={m.polymarketLink} target="_blank" rel="noopener">Polymarket</a>}
@@ -166,8 +166,8 @@ export default function MarketsPage() {
               <input value={form.category} onChange={e => setField('category', e.target.value)} />
             </div>
             <div className="admin-modal-field">
-              <label>Probability (%)</label>
-              <input type="number" value={form.probability} onChange={e => setField('probability', e.target.value)} />
+              <label>Probability (%) <span className="admin-optional">optional</span></label>
+              <input type="number" placeholder="Leave empty if unknown" value={form.probability ?? ''} onChange={e => setField('probability', e.target.value === '' ? '' : Number(e.target.value))} />
             </div>
             <div className="admin-modal-field">
               <label>Platform</label>
