@@ -200,11 +200,7 @@ export default function ConvictionsPage() {
             </div>
             <div className="admin-modal-field">
               <label>Position</label>
-              <select value={form.position} onChange={e => setField('position', e.target.value)}>
-                <option value="">—</option>
-                <option value="yes">Yes</option>
-                <option value="no">No</option>
-              </select>
+              <input value={form.position} onChange={e => setField('position', e.target.value)} placeholder="e.g. Yes, No, Péter Magyar..." />
             </div>
             <div className="admin-modal-field">
               <label>Probability (%)</label>
