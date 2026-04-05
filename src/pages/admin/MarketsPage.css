@@ -201,11 +201,12 @@
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   z-index: 200;
   animation: admin-overlay-enter 0.2s ease-out;
-  padding: 16px;
+  padding: 32px 16px;
+  overflow-y: auto;
 }
 
 @keyframes admin-overlay-enter {
@@ -220,10 +221,22 @@
   padding: 32px;
   width: 100%;
   max-width: 560px;
-  max-height: 90vh;
+  max-height: 85vh;
   overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
   box-shadow: 0 24px 64px rgba(0, 0, 0, 0.4);
   animation: admin-modal-enter 0.25s ease-out;
+}
+
+/* Make modal scrollbar visible (override global hide) */
+.admin-modal::-webkit-scrollbar {
+  display: block;
+  width: 6px;
+}
+
+.admin-modal {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(74, 222, 128, 0.3) transparent;
 }
 
 @keyframes admin-modal-enter {
