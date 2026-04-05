@@ -206,7 +206,7 @@
   z-index: 200;
   animation: admin-overlay-enter 0.2s ease-out;
   padding: 32px 16px;
-  overflow-y: auto;
+  overflow: hidden;
 }
 
 @keyframes admin-overlay-enter {
