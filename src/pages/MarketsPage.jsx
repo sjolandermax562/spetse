@@ -45,7 +45,7 @@ export default function MarketsSection() {
 
         <div className="markets__grid">
           {marketsData.map(market => (
-            <article key={market.id} className="market-card">
+            <article key={market.rowIndex} className="market-card">
               <span className="market-card__category">{market.category}</span>
               <h3 className="market-card__title">{market.title}</h3>
 

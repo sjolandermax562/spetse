@@ -79,7 +79,7 @@ export default function ConvictionsSection() {
 
         <div className="convictions__grid">
           {filtered.map(conviction => (
-            <ConvictionCard key={conviction.id} data={conviction} />
+            <ConvictionCard key={conviction.rowIndex} data={conviction} />
           ))}
           {!loading && filtered.length === 0 && (
             <p className="convictions__empty">No {filter} convictions yet.</p>

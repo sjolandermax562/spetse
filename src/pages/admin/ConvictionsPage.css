@@ -1,0 +1,14 @@
+.admin-conv-row-status {
+  text-transform: capitalize;
+}
+
+.admin-conv-dates {
+  font-size: 11px;
+  color: var(--color-text-muted);
+  font-family: var(--font-mono);
+}
+
+.admin-conv-result {
+  font-family: var(--font-mono);
+  font-size: 12px;
+}
