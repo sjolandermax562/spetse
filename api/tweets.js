@@ -21,15 +21,37 @@ export default async function handler(req, res) {
     const json = await response.json()
     const rawTweets = json.data?.tweets || []
 
-    const data = rawTweets
-      .filter(t => t.isReply !== true)
-      .map(t => ({
-        id: t.id,
-        text: t.text,
-        url: t.url,
-        date: formatTwitterDate(t.createdAt),
-        views: t.viewCount || null,
-      }))
+    const mainTweets = rawTweets.filter(t => t.isReply !== true)
+    const selfReplies = rawTweets.filter(
+      t => t.isReply === true && t.inReplyToUsername === 'SpetseHQ'
+    )
+
+    const repliesByParent = {}
+    for (const r of selfReplies) {
+      const parentId = r.inReplyToId
+      if (!parentId) continue
+      if (!repliesByParent[parentId]) repliesByParent[parentId] = []
+      repliesByParent[parentId].push({
+        id: r.id,
+        text: r.text,
+        url: r.url,
+        date: formatTwitterDate(r.createdAt),
+        views: r.viewCount || null,
+      })
+    }
+
+    for (const id of Object.keys(repliesByParent)) {
+      repliesByParent[id].sort((a, b) => (a.id < b.id ? -1 : a.id > b.id ? 1 : 0))
+    }
+
+    const data = mainTweets.map(t => ({
+      id: t.id,
+      text: t.text,
+      url: t.url,
+      date: formatTwitterDate(t.createdAt),
+      views: t.viewCount || null,
+      replies: repliesByParent[t.id] || [],
+    }))
 
     res.setHeader('Cache-Control', 's-maxage=600, stale-while-revalidate=3600')
     return res.status(200).json(data)
@@ -40,7 +62,6 @@ export default async function handler(req, res) {
 }
 
 function formatTwitterDate(dateStr) {
-  // "Mon Mar 30 20:42:15 +0000 2026" → "Mar 30, 2026"
   const d = new Date(dateStr)
   if (isNaN(d)) return dateStr
   return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
