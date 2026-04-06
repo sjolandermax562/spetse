@@ -9,23 +9,19 @@ export default async function handler(req, res) {
       return res.status(500).json({ error: 'Twitter API key not configured' })
     }
 
-    const headers = { 'X-API-Key': apiKey }
-
-    // Step 1: Fetch latest tweets from SpetseHQ
-    const timelineRes = await fetch(
+    const response = await fetch(
       'https://api.twitterapi.io/twitter/user/last_tweets?userName=SpetseHQ',
-      { headers }
+      { headers: { 'X-API-Key': apiKey } }
     )
 
-    if (!timelineRes.ok) {
-      throw new Error(`Timeline API returned ${timelineRes.status}`)
+    if (!response.ok) {
+      throw new Error(`Twitter API returned ${response.status}`)
     }
 
-    const timelineJson = await timelineRes.json()
-    const rawTweets = timelineJson.data?.tweets || []
+    const json = await response.json()
+    const rawTweets = json.data?.tweets || []
 
-    // Step 2: Filter to only main (non-reply) posts
-    const mainPosts = rawTweets
+    const data = rawTweets
       .filter(t => t.isReply !== true)
       .map(t => ({
         id: t.id,
@@ -33,53 +29,10 @@ export default async function handler(req, res) {
         url: t.url,
         date: formatTwitterDate(t.createdAt),
         views: t.viewCount || null,
-        replies: [],
       }))
 
-    // Step 3: For each main post, fetch the full thread context
-    const repliesResults = await Promise.all(
-      mainPosts.map(async (post) => {
-        try {
-          const r = await fetch(
-            `https://api.twitterapi.io/twitter/tweet/thread_context?tweetId=${post.id}`,
-            { headers }
-          )
-          if (!r.ok) {
-            console.error(`Thread context API returned ${r.status} for tweet ${post.id}`)
-            return []
-          }
-          const rj = await r.json()
-          const raw = rj.tweets || []
-
-          // Only keep SpetseHQ self-replies (exclude original tweet, other users, and replies to other users)
-          return raw
-            .filter(t =>
-              t.isReply === true &&
-              t.author?.userName === 'SpetseHQ' &&
-              t.inReplyToUsername === 'SpetseHQ'
-            )
-            .map(t => ({
-              id: t.id,
-              text: t.text,
-              url: t.url,
-              date: formatTwitterDate(t.createdAt),
-              views: t.viewCount || null,
-            }))
-            .sort((a, b) => (a.id < b.id ? -1 : a.id > b.id ? 1 : 0))
-        } catch (err) {
-          console.error(`Error fetching thread for ${post.id}:`, err.message)
-          return []
-        }
-      })
-    )
-
-    // Step 4: Attach replies to each post
-    mainPosts.forEach((post, i) => {
-      post.replies = repliesResults[i]
-    })
-
     res.setHeader('Cache-Control', 's-maxage=600, stale-while-revalidate=3600')
-    return res.status(200).json(mainPosts)
+    return res.status(200).json(data)
   } catch (err) {
     console.error('Tweets API error:', err.message)
     return res.status(500).json({ error: 'Failed to fetch tweets' })

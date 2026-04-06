@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import useSheetData from '../hooks/useSheetData'
@@ -9,6 +9,46 @@ gsap.registerPlugin(ScrollTrigger)
 export default function FeedSection() {
   const sectionRef = useRef(null)
   const { data: feedData, loading } = useSheetData('/api/tweets')
+  const [repliesMap, setRepliesMap] = useState({})
+
+  // Fetch replies for each main tweet after they load
+  useEffect(() => {
+    if (!feedData?.length) return
+
+    let cancelled = false
+
+    async function fetchAllReplies() {
+      const results = await Promise.all(
+        feedData.map(async (post) => {
+          try {
+            const res = await fetch(`/api/tweet-replies?tweetId=${post.id}`)
+            if (!res.ok) return { id: post.id, replies: [] }
+            const replies = await res.json()
+            return { id: post.id, replies }
+          } catch {
+            return { id: post.id, replies: [] }
+          }
+        })
+      )
+
+      if (cancelled) return
+
+      const map = {}
+      for (const r of results) {
+        if (r.replies.length > 0) map[r.id] = r.replies
+      }
+      setRepliesMap(map)
+    }
+
+    fetchAllReplies()
+    return () => { cancelled = true }
+  }, [feedData])
+
+  // Merge replies into posts for rendering
+  const postsWithReplies = feedData.map(post => ({
+    ...post,
+    replies: repliesMap[post.id] || [],
+  }))
 
   useEffect(() => {
     if (!feedData?.length) return
@@ -45,7 +85,7 @@ export default function FeedSection() {
         <p className="feed__handle">@SpetseHQ on X</p>
 
         <div className="feed__posts">
-          {feedData.map((post, i) => (
+          {postsWithReplies.map((post, i) => (
             <article key={post.id} className={`feed__post${i === 0 ? ' feed__post--latest' : ''}`}>
               <a className="feed__post-link" href={post.url} target="_blank" rel="noopener noreferrer">
                 <p className="feed__post-text">{post.text}</p>
