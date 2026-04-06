@@ -35,7 +35,7 @@ export default async function handler(req, res) {
     const repliesResults = await Promise.all(
       mainPosts.map(async post => {
         const r = await fetch(
-          `https://api.twitterapi.io/twitter/tweet/replies?tweetId=${post.id}`,
+          `https://api.twitterapi.io/twitter/tweet/replies/v2?queryType=Relevance&tweetId=${post.id}`,
           { headers: { 'X-API-Key': apiKey } }
         )
         if (!r.ok) return []
