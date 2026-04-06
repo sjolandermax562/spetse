@@ -166,6 +166,67 @@
   margin: 0 0 0.65rem;
 }
 
+.feed__reply-text--clamped {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.feed__reply-text-toggle {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.05em;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  text-decoration: none;
+  opacity: 0.6;
+  transition: opacity 0.2s ease;
+  margin-bottom: 0.5rem;
+  user-select: none;
+}
+
+.feed__reply-text-toggle:hover,
+.feed__reply-text-toggle:focus-visible {
+  opacity: 1;
+}
+
+.feed__reply-text-toggle:focus-visible {
+  outline: 1px solid var(--color-text-muted);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+.feed__thread-more-btn {
+  width: 100%;
+  padding: 0.5rem;
+  margin-top: 0.5rem;
+  border: none;
+  border-top: 1px solid var(--color-card-border);
+  background: transparent;
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  opacity: 0.6;
+  transition: opacity 0.2s ease;
+  border-radius: 0 0 6px 6px;
+}
+
+.feed__thread-more-btn:hover,
+.feed__thread-more-btn:focus-visible {
+  opacity: 1;
+}
+
+.feed__thread-more-btn:focus-visible {
+  outline: 1px solid var(--color-text-muted);
+  outline-offset: 2px;
+}
+
 .feed__reply-meta {
   display: flex;
   align-items: center;

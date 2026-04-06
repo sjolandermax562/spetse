@@ -6,10 +6,14 @@ import './FeedPage.css'
 
 gsap.registerPlugin(ScrollTrigger)
 
+const TEXT_TRUNCATE_LENGTH = 200
+
 export default function FeedSection() {
   const sectionRef = useRef(null)
   const { data: feedData, loading } = useSheetData('/api/tweets')
   const [repliesMap, setRepliesMap] = useState({})
+  const [expandedText, setExpandedText] = useState({})
+  const [expandedReplies, setExpandedReplies] = useState({})
 
   // Fetch replies for each main tweet after they load
   useEffect(() => {
@@ -99,21 +103,98 @@ export default function FeedSection() {
                 <div className="feed__thread" role="group" aria-label="Threaded replies">
                   <div className="feed__thread-line" aria-hidden="true" />
                   <div className="feed__thread-replies">
-                    {post.replies.map((reply) => (
-                      <a
-                        key={reply.id}
-                        className="feed__reply"
-                        href={reply.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        <p className="feed__reply-text">{reply.text}</p>
-                        <div className="feed__reply-meta">
-                          <span className="feed__reply-date">{reply.date}</span>
-                          {reply.views && <span className="feed__reply-views">{reply.views.toLocaleString()} views</span>}
+                    {post.replies.map((reply, replyIndex) => {
+                      const isLongText = reply.text.length > TEXT_TRUNCATE_LENGTH
+                      const isTextExpanded = expandedText[reply.id]
+                      const isFirstReply = replyIndex === 0
+                      const isRepliesExpanded = expandedReplies[post.id]
+
+                      // Hide replies beyond the first unless expanded
+                      if (!isFirstReply && !isRepliesExpanded) return null
+
+                      const hiddenCount = post.replies.length - 1
+
+                      return (
+                        <div key={reply.id}>
+                          <a
+                            className="feed__reply"
+                            href={reply.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            <p
+                              className={`feed__reply-text${isLongText && !isTextExpanded ? ' feed__reply-text--clamped' : ''}`}
+                            >
+                              {reply.text}
+                            </p>
+                            {isLongText && (
+                              <span
+                                className="feed__reply-text-toggle"
+                                role="button"
+                                tabIndex={0}
+                                aria-expanded={isTextExpanded}
+                                onClick={(e) => {
+                                  e.preventDefault()
+                                  e.stopPropagation()
+                                  setExpandedText((prev) => ({
+                                    ...prev,
+                                    [reply.id]: !prev[reply.id],
+                                  }))
+                                }}
+                                onKeyDown={(e) => {
+                                  if (e.key === 'Enter' || e.key === ' ') {
+                                    e.preventDefault()
+                                    e.stopPropagation()
+                                    setExpandedText((prev) => ({
+                                      ...prev,
+                                      [reply.id]: !prev[reply.id],
+                                    }))
+                                  }
+                                }}
+                              >
+                                {isTextExpanded ? 'show less' : 'show more'}
+                              </span>
+                            )}
+                            <div className="feed__reply-meta">
+                              <span className="feed__reply-date">{reply.date}</span>
+                              {reply.views && <span className="feed__reply-views">{reply.views.toLocaleString()} views</span>}
+                            </div>
+                          </a>
+
+                          {/* "Show more replies" button after the first reply */}
+                          {isFirstReply && hiddenCount > 0 && !isRepliesExpanded && (
+                            <button
+                              type="button"
+                              className="feed__thread-more-btn"
+                              onClick={() => {
+                                setExpandedReplies((prev) => ({
+                                  ...prev,
+                                  [post.id]: true,
+                                }))
+                              }}
+                            >
+                              show more replies ({hiddenCount})
+                            </button>
+                          )}
                         </div>
-                      </a>
-                    ))}
+                      )
+                    })}
+
+                    {/* "Show less replies" button when expanded and there are 2+ replies */}
+                    {post.replies.length > 1 && expandedReplies[post.id] && (
+                      <button
+                        type="button"
+                        className="feed__thread-more-btn"
+                        onClick={() => {
+                          setExpandedReplies((prev) => ({
+                            ...prev,
+                            [post.id]: false,
+                          }))
+                        }}
+                      >
+                        show less replies
+                      </button>
+                    )}
                   </div>
                 </div>
               )}
