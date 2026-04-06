@@ -54,6 +54,29 @@ export default function FeedSection() {
                   {post.views && <span className="feed__post-views">{post.views.toLocaleString()} views</span>}
                 </div>
               </a>
+
+              {post.replies?.length > 0 && (
+                <div className="feed__thread" role="group" aria-label="Threaded replies">
+                  <div className="feed__thread-line" aria-hidden="true" />
+                  <div className="feed__thread-replies">
+                    {post.replies.map((reply) => (
+                      <a
+                        key={reply.id}
+                        className="feed__reply"
+                        href={reply.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <p className="feed__reply-text">{reply.text}</p>
+                        <div className="feed__reply-meta">
+                          <span className="feed__reply-date">{reply.date}</span>
+                          {reply.views && <span className="feed__reply-views">{reply.views.toLocaleString()} views</span>}
+                        </div>
+                      </a>
+                    ))}
+                  </div>
+                </div>
+              )}
             </article>
           ))}
           {!loading && feedData.length === 0 && (
