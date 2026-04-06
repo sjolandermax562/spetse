@@ -21,60 +21,43 @@ export default async function handler(req, res) {
     const json = await response.json()
     const rawTweets = json.data?.tweets || []
 
-    // Normalize every tweet from the timeline into a flat shape
-    const allTweets = rawTweets.map(t => ({
-      id: t.id,
-      text: t.text,
-      url: t.url,
-      date: formatTwitterDate(t.createdAt),
-      views: t.viewCount || null,
-      isReply: t.isReply === true,
-      inReplyToId: t.inReplyToId || '',
-      inReplyToUsername: t.inReplyToUsername || '',
-    }))
+    const mainPosts = rawTweets
+      .filter(t => t.isReply !== true)
+      .map(t => ({
+        id: t.id,
+        text: t.text,
+        url: t.url,
+        date: formatTwitterDate(t.createdAt),
+        views: t.viewCount || null,
+        replies: [],
+      }))
 
-    // Step 1: Main posts = tweets that are NOT replies
-    const mainPosts = []
-    for (const t of allTweets) {
-      if (!t.isReply) {
-        mainPosts.push({ ...t, replies: [] })
-      }
-    }
-
-    // Step 2: Self-replies = isReply===true AND inReplyToUsername==="SpetseHQ"
-    //         These are follow-ups SpetseHQ posted to its own tweets
-    const selfReplies = allTweets.filter(
-      t => t.isReply && t.inReplyToUsername === 'SpetseHQ'
+    const repliesResults = await Promise.all(
+      mainPosts.map(async post => {
+        const r = await fetch(
+          `https://api.twitterapi.io/twitter/tweet/replies?tweetId=${post.id}`,
+          { headers: { 'X-API-Key': apiKey } }
+        )
+        if (!r.ok) return []
+        const rj = await r.json()
+        const raw = rj.tweets || []
+        return raw
+          .filter(t => t.author?.userName === 'SpetseHQ' && t.inReplyToUsername === 'SpetseHQ')
+          .map(t => ({
+            id: t.id,
+            text: t.text,
+            url: t.url,
+            date: formatTwitterDate(t.createdAt),
+            views: t.viewCount || null,
+          }))
+          .sort((a, b) => (a.id < b.id ? -1 : a.id > b.id ? 1 : 0))
+      })
     )
 
-    // Step 3: Group self-replies under their parent using inReplyToId → parent.id
-    //         Only attach if the parent exists in this batch
-    const mainPostMap = new Map(mainPosts.map(p => [p.id, p]))
-
-    for (const reply of selfReplies) {
-      const parent = mainPostMap.get(reply.inReplyToId)
-      if (parent) {
-        parent.replies.push({
-          id: reply.id,
-          text: reply.text,
-          url: reply.url,
-          date: reply.date,
-          views: reply.views,
-        })
-      }
-    }
-
-    // Step 4: Sort replies within each thread chronologically (oldest first)
-    //         Twitter snowflake IDs sort lexicographically in time order
-    for (const post of mainPosts) {
-      post.replies.sort((a, b) => (a.id < b.id ? -1 : a.id > b.id ? 1 : 0))
-    }
-
-    // Step 5: Strip internal fields before sending to client
-    const data = mainPosts.map(({ isReply, inReplyToId, inReplyToUsername, ...post }) => post)
+    mainPosts.forEach((post, i) => { post.replies = repliesResults[i] })
 
     res.setHeader('Cache-Control', 's-maxage=600, stale-while-revalidate=3600')
-    return res.status(200).json(data)
+    return res.status(200).json(mainPosts)
   } catch (err) {
     console.error('Tweets API error:', err.message)
     return res.status(500).json({ error: 'Failed to fetch tweets' })
